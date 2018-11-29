@@ -47,7 +47,11 @@ function actualizar()
 
 				  document.getElementsByTagName('tbody')[0].appendChild(row);
 
-			  });     
+			  });                                       
+			  var botonesEliminar = document.getElementsByClassName('Eliminar');
+			  for  (var i=0; i<botonesEliminar.length; i++){
+			  	botonesEliminar[i].addEventListener('click', eliminarUsuario(response.students[i]));
+			  } 
 			} 
 		}
 	};
@@ -55,6 +59,24 @@ function actualizar()
 	xhttp.open("GET", "http://nyc.pixan.io/ajax/public/api/students", true);
 	xhttp.send();
 }
+function eliminarUsuario(student)
+{
+	return function(event){
+		var xhttp =new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			if (this.readyState == 4 && this.status == 200)
+			{
+
+			event.target.parentNode.parentNode.parentNode.removeChild(event.target.parentNode.parentNode);
+			 
+			}
+		};
+
+		xhttp.open("DELETE", "http://nyc.pixan.io/ajax/public/api/students/" + student.id, true);
+		xhttp.send();
+	}
+}
+
 	function guardar() 
 	{
 
@@ -65,7 +87,7 @@ function actualizar()
 
 		var data=new FormData();
 				data.append('first_name', first_name);
-				data.append('last_name', first_name);
+				data.append('last_name', last_name);
 				data.append('phone_number', phone_number);
 				data.append('email', email);
 
