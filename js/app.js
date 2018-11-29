@@ -4,7 +4,7 @@ var btnGuardar= document.getElementById("btnGuardar");
 btnActualizar.addEventListener('click', actualizar);
 btnGuardar.addEventListener('click', guardar); 
 
-actualizar();
+
 function actualizar()
 {
 	var xhttp=new XMLHttpRequest();
@@ -22,18 +22,28 @@ function actualizar()
 				  var idCell = document.createElement("td");
 				  var firstNameCell = document.createElement("td");
 				  var lastNameCell = document.createElement("td");
+				  var deleteButtonCell = document.createElement("td");
+				  var deleteButton=document.createElement("button");
+				  deleteButton.className = "Eliminar";
+
+
 
 				  var idText= document.createTextNode(student.id);
 				  var firstText= document.createTextNode(student.first_name);
 				  var lastText= document.createTextNode(student.last_name);
+				  var deleteButtonText= document.createTextNode("Eliminar");
 
 				  idCell.appendChild(idText);
 				  firstNameCell.appendChild(firstText);
 				  lastNameCell.appendChild(lastText);
 
+				  deleteButton.appendChild(deleteButtonText);
+				  deleteButtonCell.appendChild(deleteButton);
+
 				  row.appendChild(idCell);
 				  row.appendChild(firstNameCell);
 				  row.appendChild(lastNameCell);
+				  row.appendChild(deleteButtonCell);
 
 				  document.getElementsByTagName('tbody')[0].appendChild(row);
 
